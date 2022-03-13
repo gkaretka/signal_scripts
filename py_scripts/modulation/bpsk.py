@@ -45,10 +45,17 @@ def dbpsk(data, symbol_freq, carrier_freq, sample_freq):
 mod_sig_dbpsk, vals = dbpsk(data, symbol_freq, carrier_freq, sample_freq)
 mod_signal, c, data = bpsk(data, symbol_freq, carrier_freq, sample_freq)
 
+fft_data_in = data
+res = np.abs(np.fft.fft(fft_data_in)/len(fft_data_in))
+
 fig, axs = plt.subplots(nrows=5)
 axs[0].plot(data)           # input
 axs[1].plot(vals)           # xor-ed
 axs[2].plot(c)              # carrier
 axs[3].plot(mod_signal)     # bpsk
 axs[4].plot(mod_sig_dbpsk)  # dbpsk
+
+fig2, ax2 = plt.subplots()
+ax2.plot(res)
+
 plt.show()
