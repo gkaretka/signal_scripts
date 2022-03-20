@@ -22,7 +22,7 @@ def bpsk(data, symbol_freq, carrier_freq, sample_freq):
     data = np.repeat(data, len(t)/len(data), axis=0)
     mod_signal = c * data
 
-    return mod_signal, c, data
+    return mod_signal, c, data, t
 
 
 def dbpsk(data, symbol_freq, carrier_freq, sample_freq):
@@ -43,19 +43,28 @@ def dbpsk(data, symbol_freq, carrier_freq, sample_freq):
 
 
 mod_sig_dbpsk, vals = dbpsk(data, symbol_freq, carrier_freq, sample_freq)
-mod_signal, c, data = bpsk(data, symbol_freq, carrier_freq, sample_freq)
+mod_signal, c, data, t = bpsk(data, symbol_freq, carrier_freq, sample_freq)
 
-fft_data_in = data
-res = np.abs(np.fft.fft(fft_data_in)/len(fft_data_in))
+#fft_data_in = c
+#res = np.abs(np.fft.fft(fft_data_in)/len(fft_data_in))
 
 fig, axs = plt.subplots(nrows=5)
-axs[0].plot(data)           # input
-axs[1].plot(vals)           # xor-ed
-axs[2].plot(c)              # carrier
-axs[3].plot(mod_signal)     # bpsk
-axs[4].plot(mod_sig_dbpsk)  # dbpsk
+axs[0].plot(t, data)           # input
+axs[0].set_title("Input data")
 
-fig2, ax2 = plt.subplots()
-ax2.plot(res)
+axs[1].plot(t, vals)           # xor-ed
+axs[1].set_title("XOR-ed input data")
+
+axs[2].plot(t, c)              # carrier
+axs[2].set_title("Carrier")
+
+axs[3].plot(t, mod_signal)     # bpsk
+axs[3].set_title("BPSK")
+
+axs[4].plot(t, mod_sig_dbpsk)  # dbpsk
+axs[4].set_title("DBPSK")
+
+#fig2, ax2 = plt.subplots()
+#ax2.plot(res)
 
 plt.show()
