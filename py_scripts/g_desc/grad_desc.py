@@ -58,8 +58,6 @@ def calc_reggression(pts_x, pts_y):
 fig, axs = plt.subplots(nrows=2, ncols=2)
 for k in range(0, 2):
     for j in range(0, 2):
-        x = np.arange(0, 15, 0.1)
-
         range_x = (10, 15)
         range_y = (2, 3)
 
@@ -71,7 +69,14 @@ for k in range(0, 2):
             _pts_x.append(_x)
             _pts_y.append(_y)
 
+        _pts_x = np.array(_pts_x)
+
+        x_max =  np.max(_pts_x)
+
+        _pts_x /= x_max
+
         a, b, As, Bs = calc_reggression(_pts_x, _pts_y)
+        x = np.arange(0, 15/x_max, 0.1)
         y = x * a + b
 
         ys = []
