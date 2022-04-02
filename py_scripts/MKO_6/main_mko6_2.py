@@ -74,6 +74,6 @@ sns.lineplot(data=data_1, x="Frequency [MHz]", y="Attenuation [dB]", hue="Condit
 plt.grid()
 
 fig2, ax2 = plt.subplots()
-sns.lineplot(data=data_2, x="Frequency [MHz]", y="Attenuation [dB]", hue="Conditions", ax=ax2)
+sns.lineplot(data=data_2, x="Frequency [MHz]", y="Attenuation [dB]", style="Conditions", hue="Conditions", ax=ax2)
 plt.grid()
 plt.show()
